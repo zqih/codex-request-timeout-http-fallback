@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex HTTP Fallback"
+  short_description: "Downgrade Codex WebSocket to HTTP/SSE"
+  default_prompt: "Use $codex-http-fallback to configure Codex with an HTTP/SSE provider instead of WebSocket streaming."
