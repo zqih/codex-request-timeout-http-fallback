@@ -1,6 +1,6 @@
 ---
 name: codex-http-fallback
-description: Configure Codex to use an HTTP/SSE OpenAI provider instead of WebSocket streaming. Use when Codex should directly add or verify the openai-http provider module in config.toml with wire_api, supports_websockets, requires_openai_auth, and model_provider settings to downgrade WebSocket transport to HTTP/SSE.
+description: Configure Codex to use an HTTP/SSE OpenAI provider instead of WebSocket streaming. Use when Codex has "request timed out", retries 5 times, proxy-related timeout issues, or needs the openai-http provider module in config.toml with wire_api, supports_websockets, requires_openai_auth, and model_provider settings to downgrade WebSocket transport to HTTP/SSE.
 ---
 
 # Codex HTTP Fallback
