@@ -4,7 +4,7 @@
 
 ## 中文
 
-这个仓库提供一个 Codex skill，用来解决部分代理网络环境下 Codex 首次启动或首次提问时反复出现：
+这个仓库提供一个一次性配置方法，用来解决部分代理网络环境下 Codex 首次启动或首次提问时反复出现：
 
 - `request timed out`
 - Codex 自动重试 5 次
@@ -53,23 +53,17 @@ requires_openai_auth = true
 
 然后完全退出并重新打开 Codex 桌面端。
 
-## 作为 Codex Skill 使用
+## 给 Codex 执行
 
-把本仓库中的 skill 安装到：
-
-```bash
-~/.codex/skills/codex-http-fallback
-```
-
-以后可以直接对 Codex 说：
+这个方法不需要常驻安装成 skill。你可以把 `SKILL.md` 里的说明复制给 Codex，或者直接对 Codex 说：
 
 ```text
-Use $codex-http-fallback to configure Codex with an HTTP/SSE provider instead of WebSocket streaming.
+按照这个仓库里的 SKILL.md，把我的 Codex config.toml 配置成 HTTP/SSE provider，不走 WebSocket streaming。
 ```
 
 ## English
 
-This repository provides a Codex skill for fixing a common Codex startup/request failure in proxy-heavy network environments:
+This repository provides a one-time configuration recipe for fixing a common Codex startup/request failure in proxy-heavy network environments:
 
 - `request timed out`
 - Codex retries 5 times
@@ -118,21 +112,14 @@ requires_openai_auth = true
 
 Then fully quit and reopen the Codex desktop app.
 
-## Use as a Codex Skill
+## Ask Codex to Apply It
 
-Install this skill at:
-
-```bash
-~/.codex/skills/codex-http-fallback
-```
-
-Then ask Codex:
+This method does not need to be installed as a persistent skill. You can paste `SKILL.md` into Codex, or ask Codex:
 
 ```text
-Use $codex-http-fallback to configure Codex with an HTTP/SSE provider instead of WebSocket streaming.
+Follow the SKILL.md in this repository and configure my Codex config.toml to use an HTTP/SSE provider instead of WebSocket streaming.
 ```
 
 ## Files
 
-- `SKILL.md`: the actual Codex skill instructions.
-- `agents/openai.yaml`: UI metadata for Codex skill discovery.
+- `SKILL.md`: concise instructions that Codex can follow once to update `config.toml`.
