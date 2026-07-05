@@ -10,7 +10,7 @@ description: Fix Codex "request timed out" and 5 retries in proxy environments. 
 This skill fixes Codex `request timed out` and repeated retry failures in proxy environments. There are two methods:
 
 1. **HTTP/SSE fallback**: add a custom `openai-http` provider with `supports_websockets = false`.
-2. **Keep WebSocket**: restore the default `openai` provider and make the proxy path stable for WebSocket traffic.
+2. **Keep WebSocket**: leave Codex's default provider alone and make the proxy path stable for WebSocket traffic.
 
 Ask which method the user wants only when their intent is unclear. If the user wants the quickest workaround, use Method 1. If the user says they still want WebSocket, use Method 2.
 
@@ -77,36 +77,9 @@ Run Codex strict config validation if the installed CLI exposes it. If validatio
 
 Fully quit and reopen Codex Desktop after changing the provider. Existing app-server processes and already-open threads may keep the previous provider snapshot until restart.
 
-## Method 2: Keep WebSocket And Fix Proxy
+## Method 2: Keep Default WebSocket And Fix Proxy
 
-Use this method when the user wants to keep Codex's default WebSocket streaming.
-
-### Restore The Default Provider
-
-Back up the config:
-
-```bash
-cp ~/.codex/config.toml ~/.codex/config.toml.bak-restore-websocket-$(date +%Y%m%d-%H%M%S)
-```
-
-Edit `~/.codex/config.toml` and remove the custom HTTP fallback selection:
-
-```toml
-model_provider = "openai-http"
-```
-
-Also remove the full custom block:
-
-```toml
-[model_providers.openai-http]
-name = "OpenAI HTTP"
-base_url = "https://chatgpt.com/backend-api/codex"
-wire_api = "responses"
-supports_websockets = false
-requires_openai_auth = true
-```
-
-Keep project trust settings and unrelated desktop/plugin settings unchanged. After removal, Codex should use the built-in `openai` provider.
+Use this method when the user has a normal or fresh Codex install and wants to keep Codex's default WebSocket streaming. Do not edit `~/.codex/config.toml` for this method unless the user explicitly says they previously added an HTTP fallback provider. The default Codex provider already uses WebSocket when the network path supports it.
 
 ### Find And Test The Local Proxy Port
 
